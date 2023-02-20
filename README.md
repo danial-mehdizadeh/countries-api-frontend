@@ -14,6 +14,8 @@ Thanks for checking out this front-end coding challenge.
 
 Your challenge is to integrate with the [REST Countries API](https://restcountries.com) to pull country data and display it like in the designs.
 
+integrate: Become one; become integrated
+
 You can use any JavaScript framework/library on the front-end such as [React](https://reactjs.org) or [Vue](https://vuejs.org). You also have complete control over which packages you use to do things like make HTTP requests or style your project.
 
 Your users should be able to:
