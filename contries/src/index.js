@@ -3,11 +3,13 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-
+import ThemeContextWrapper from "./ThemeWrapper";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
+  <ThemeContextWrapper>
+    <App />
+  </ThemeContextWrapper>
   // <React.StrictMode>
-  <App />
   // </React.StrictMode>
 );
 
