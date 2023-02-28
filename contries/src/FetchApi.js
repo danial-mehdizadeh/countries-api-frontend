@@ -8,6 +8,7 @@ import "./customize.css";
 import SearchSector from "./SearchSector";
 import Contact from "./Contact";
 import SinglePage from "./SinglePage";
+
 import { BrowserRouter, Route, Switch, NavLink, Link } from "react-router-dom";
 function Body() {
   const [contries, setContries] = useState([]);
@@ -86,10 +87,7 @@ function Body() {
                   return (
                     <Col md={3} sm={12}>
                       <Link to={`/contries/${element.cca2.toLowerCase()}`}>
-                        <article
-                          onClick={() => alert("hey")}
-                          style={{ cursor: "pointer" }}
-                        >
+                        <article style={{ cursor: "pointer" }}>
                           <h3 key={key + "1"}>{element.name.common}</h3>
                           <img
                             alt={element.name.common + " flag"}
@@ -120,8 +118,7 @@ function Body() {
           <SinglePage
             contries={contries}
             setContries={setContries}
-            fetchAll={fetchAll}
-          />
+          ></SinglePage>
         </Route>
 
         <Route path={"/contact"}>

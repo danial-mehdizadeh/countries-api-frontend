@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 
 export default function SearchSector(props) {
   const { contries, setContries } = props;
-  const { search, setSearch } = props;
+  const [search, setSearch] = useState("");
   console.log(setContries);
   console.log("we are in search sector and this is contries");
   JSON.parse(localStorage.getItem("contries"));
@@ -32,12 +32,29 @@ export default function SearchSector(props) {
       );
     }
   }
+  function searchIt2(query) {
+    if (query === "") {
+      setContries(JSON.parse(localStorage.getItem("contries")));
+    } else {
+      setContries(
+        JSON.parse(localStorage.getItem("contries")).filter((element) => {
+          const regex = new RegExp(`${search.toLowerCase()}`);
+          if (element?.name?.common?.toLowerCase().match(regex)) {
+            console.log(element);
+            return element;
+          }
+          return false;
+        })
+      );
+    }
+  }
   const [selectedRegion, setSelectedRegion] = useState("All"); // Declare a state variable...
+  // const [searchMe, setSearchMe] = useState("All"); // Declare a state variable...
   useEffect(() => {
     searchIt(selectedRegion);
   }, [selectedRegion]);
   useEffect(() => {
-    searchIt(search, "search");
+    searchIt2(search);
   }, [search]);
 
   return (
@@ -50,9 +67,9 @@ export default function SearchSector(props) {
                 <Form.Control
                   placeholder="Recipient's username"
                   aria-label="Recipient's username"
-                  aria-describedby="basic-addon2"
                   value={search} // ...force the select's value to match the state variable...
                   onChange={(e) => setSearch(e.target.value)} // ... and update the state variable on any change!
+                  aria-describedby="basic-addon2"
                 />
                 <Button variant="outline-secondary" id="button-addon2">
                   Search

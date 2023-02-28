@@ -8,7 +8,7 @@ import ColorSwitcher from "./ColorSwitcher";
 export default function Header(props) {
   const { theme, setTheme } = props;
   return (
-    <header className={"bg-light p-3 header"}>
+    <header className={" p-3 header"}>
       <Container>
         <Row className={["d-flex justify-content-between"]}>
           <Col>
