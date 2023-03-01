@@ -1,15 +1,11 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 // import Image from "react-bootstrap/Image";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import "./customize.css";
-import SearchSector from "./SearchSector";
 import Contact from "./Contact";
 import SinglePage from "./SinglePage";
-
-import { BrowserRouter, Route, Switch, NavLink, Link } from "react-router-dom";
+import Home from "./Home";
+import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 function Body() {
   const [contries, setContries] = useState([]);
   const [url, setUrl] = useState("https://restcountries.com/v3.1/all");
@@ -76,55 +72,18 @@ function Body() {
 
   return (
     <BrowserRouter>
-      <Switch>
-        <Route exact path={"/"}>
-          <div>
-            {console.log(contries)}
-            <SearchSector contries={contries} setContries={setContries} />
-            <Container>
-              <Row>
-                {contries?.map((element, key) => {
-                  return (
-                    <Col md={3} sm={12}>
-                      <Link to={`/contries/${element.cca2.toLowerCase()}`}>
-                        <article style={{ cursor: "pointer" }}>
-                          <h3 key={key + "1"}>{element.name.common}</h3>
-                          <img
-                            alt={element.name.common + " flag"}
-                            className={["img-fluid"]}
-                            src={element.flags?.png}
-                            key={"2" + key}
-                          />
-                          <ul>
-                            <li>Population: {element.population}</li>
-                            <li>Region: {element.region}</li>
-                            <li>
-                              Capital:{" "}
-                              {element.capital?.map((element, key) => {
-                                return element;
-                              })}
-                            </li>
-                          </ul>
-                        </article>
-                      </Link>
-                    </Col>
-                  );
-                })}
-              </Row>
-            </Container>
-          </div>
-        </Route>
-        <Route path={"/contries/:code"}>
-          <SinglePage
-            contries={contries}
-            setContries={setContries}
-          ></SinglePage>
-        </Route>
+      <Routes>
+        <Route
+          path={"/"}
+          element={<Home contries={contries} setContries={setContries} />}
+        ></Route>
+        <Route
+          path={"/contries/:code"}
+          element={<SinglePage contries={contries} />}
+        ></Route>
 
-        <Route path={"/contact"}>
-          <Contact />
-        </Route>
-      </Switch>
+        <Route path={"/contact"} element={<Contact />}></Route>
+      </Routes>
     </BrowserRouter>
   );
 }
